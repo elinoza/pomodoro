@@ -10,8 +10,17 @@ This is a simple Pomodoro Tracker built with Next.js and Tailwind CSS. The Pomod
 
 - **Add Time**: Easily add time to the current interval.
 - **Background Color**: Dynamically change the background color based on the Pomodoro phase.
-  
-## Installation
+
+## Usage
+
+The Pomodoro Tracker is easy to use. Once the server is running, navigate to `http://localhost:3000` to start using the application. You can start the timer, pause it, reset it, and add time to the current interval as needed. The background color of the Pomodoro component changes dynamically based on the current phase of the timer.
+
+## Technologies Used
+
+- **Next.js**: The React Framework for Production.
+- **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
+
+- ## Installation
 
 To get started with the project, follow these steps:
 
@@ -31,12 +40,3 @@ To get started with the project, follow these steps:
    ```bash
    npm run dev
    ```
-
-## Usage
-
-The Pomodoro Tracker is easy to use. Once the server is running, navigate to `http://localhost:3000` to start using the application. You can start the timer, pause it, reset it, and add time to the current interval as needed. The background color of the Pomodoro component changes dynamically based on the current phase of the timer.
-
-## Technologies Used
-
-- **Next.js**: The React Framework for Production.
-- **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
