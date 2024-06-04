@@ -10,8 +10,7 @@ const Pomodoro = () => {
   const [parameter, setParameter] = useState(25);
   const [remainingTime, setRemainingTime] = useState(null);
   const [isPaused, setisPaused] = useState(false);
-  const [backgroundColor, setBackgroundColor] = useState("bg-red-500");
-  const [pausedTime, setPausedTime] = useState(null);
+  const [backgroundColor, setBackgroundColor] = useState("bg-[#E5543C]");
 
   const clearIntervalId = () => {
     clearInterval(intervalId);
@@ -21,10 +20,10 @@ const Pomodoro = () => {
     clearIntervalId();
     if (parameter === 25) {
       setParameter(5);
-      setBackgroundColor("bg-green-500");
+      setBackgroundColor("bg-[#039F5A]");
     } else {
       setParameter(25);
-      setBackgroundColor("bg-red-500");
+      setBackgroundColor("bg-[#E5543C]");
     }
   };
 
