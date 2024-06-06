@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { IoLogoGithub } from "react-icons/io";
 
 import Button from "../components/Button";
 import { TbPlayerTrackNextFilled } from "react-icons/tb";
@@ -114,29 +115,40 @@ const Pomodoro = () => {
           </Button>
         )}
       </div>
-      <div className="group inline-flex absolute right-[10px] top-[10px]">
-        {parameter === 25 ? "POMODORO" : "TAKE A SHORT BREAK"}
-        {!intervalId && !isPaused && parameter === 25 ? (
-          <Button
-            onClick={handleParameter}
-            className="  h-[25px] w-[25px] focus:outline-none"
-          >
-            <span>
-              <TbPlayerTrackNextFilled />
-            </span>
-          </Button>
-        ) : (
-          <Button
-            onClick={() =>
-              setRemainingTime((remainingTime) => remainingTime + 1000 * 60)
-            }
-            className="  h-[25px] w-[25px] focus:outline-none"
-          >
-            <span>
-              <AiFillPlusCircle />
-            </span>
-          </Button>
-        )}
+      <div className="group inline-flex justify-between w-full absolute  top-[10px] px-2 ">
+        <div className="text-xl">
+          {" "}
+          <span>
+            <a href="https://github.com/elinoza/pomodoro" target="_blank">
+              <IoLogoGithub />
+            </a>
+          </span>
+        </div>
+        <div>
+          {" "}
+          {parameter === 25 ? "POMODORO" : "TAKE A SHORT BREAK"}
+          {!intervalId && !isPaused && parameter === 25 ? (
+            <Button
+              onClick={handleParameter}
+              className="  h-[25px] w-[25px] focus:outline-none"
+            >
+              <span>
+                <TbPlayerTrackNextFilled />
+              </span>
+            </Button>
+          ) : (
+            <Button
+              onClick={() =>
+                setRemainingTime((remainingTime) => remainingTime + 1000 * 60)
+              }
+              className="  h-[25px] w-[25px] focus:outline-none"
+            >
+              <span>
+                <AiFillPlusCircle />
+              </span>
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );
