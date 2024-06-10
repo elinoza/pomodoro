@@ -2,20 +2,26 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { IoLogoGithub } from "react-icons/io";
 
-import Button from "../components/Button";
+import Button from "./Button";
 import { TbPlayerTrackNextFilled } from "react-icons/tb";
 import { AiFillPlusCircle } from "react-icons/ai";
 
 const Pomodoro = () => {
-  const [intervalId, setIntervalId] = useState(null);
-  const [parameter, setParameter] = useState(25);
-  const [remainingTime, setRemainingTime] = useState(null);
-  const [isPaused, setisPaused] = useState(false);
-  const [backgroundColor, setBackgroundColor] = useState("bg-[#E5543C]");
+  const [intervalId, setIntervalId] = useState<
+    number | NodeJS.Timeout | undefined
+  >(undefined);
+  const [parameter, setParameter] = useState<25 | 5>(25);
+  const [remainingTime, setRemainingTime] = useState<number | undefined>(
+    undefined
+  );
+  const [isPaused, setisPaused] = useState<boolean>(false);
+  const [backgroundColor, setBackgroundColor] = useState<
+    "bg-[#E5543C]" | "bg-[#039F5A]"
+  >("bg-[#E5543C]");
 
   const clearIntervalId = () => {
     clearInterval(intervalId);
-    setIntervalId(null);
+    setIntervalId(undefined);
   };
   const handleParameter = () => {
     clearIntervalId();
@@ -28,7 +34,7 @@ const Pomodoro = () => {
     }
   };
 
-  const format = (remainingTime) => {
+  const format = (remainingTime: number) => {
     return new Date(remainingTime).toLocaleTimeString("en").slice(2, 7);
   };
 
@@ -36,24 +42,30 @@ const Pomodoro = () => {
     if (!isPaused) {
       setisPaused(true);
       clearIntervalId();
-      // setPausedTime(remainingTime)
     } else {
       setisPaused(false);
       handleInterval();
-      //   //setPausedTime(null)
     }
   };
 
   const handleInterval = () => {
-    let newIntervalId;
-    newIntervalId = setInterval(() => {
-      setRemainingTime((remainingTime) => remainingTime - 1000);
-    }, 1000);
-    setIntervalId(newIntervalId);
+    if (remainingTime !== undefined) {
+      const newIntervalId = setInterval(() => {
+        setRemainingTime((prevTime) => {
+          if (prevTime !== undefined && prevTime > 0) {
+            return prevTime - 1000;
+          } else {
+            clearIntervalId();
+            return undefined;
+          }
+        });
+      }, 1000);
+      setIntervalId(newIntervalId);
+    }
   };
 
   const handleStart = () => {
-    if (intervalId) {
+    if (intervalId !== undefined) {
       clearIntervalId();
     }
     handleInterval();
@@ -71,7 +83,7 @@ const Pomodoro = () => {
 
   useEffect(() => {
     if (remainingTime === 0) {
-      setRemainingTime(null);
+      setRemainingTime(undefined);
       clearIntervalId();
     }
   }, [remainingTime, intervalId]);
@@ -81,7 +93,7 @@ const Pomodoro = () => {
       <div>
         {" "}
         <span className="text-[5rem]  absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
-          {format(remainingTime)}
+          {remainingTime && format(remainingTime)}
         </span>
       </div>
 
@@ -139,7 +151,11 @@ const Pomodoro = () => {
           ) : (
             <Button
               onClick={() =>
-                setRemainingTime((remainingTime) => remainingTime + 1000 * 60)
+                setRemainingTime((remainingTime) => {
+                  if (remainingTime !== undefined) {
+                    return remainingTime + 1000 * 60;
+                  }
+                })
               }
               className="  h-[25px] w-[25px] focus:outline-none"
             >

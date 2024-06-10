@@ -1,7 +1,12 @@
 import React from "react";
 import clsx from "clsx";
 
-const Button = React.forwardRef(function Button(
+type ButtonProps = {
+  children: React.ReactNode;
+  className?: string;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   { className, children, ...props },
   ref
 ) {
